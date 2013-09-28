@@ -1,0 +1,78 @@
+// Map 3D ASCII
+// ------------
+// File format: Karol Sarnacki
+
+// Starting position of player
+// (int)Start-X  (int)Start-Y
+Start: 7 6
+
+// (String)"Name of light"  (int)Position-X  (int)Position-Y
+// LiteBlue
+Light: 3 5
+// Parameters of light: Ambient, Diffuse, Specular, Position
+0.400000 0.400000 0.400000 1.000000
+0.500000 0.500000 1.000000 1.000000
+0.000000 0.000000 0.000000 1.000000
+-0.75000 3.500000 0.750000 1.000000
+
+// Pink
+Light: 11 3
+0.500000 0.350000 0.350000 1.000000
+0.950000 0.500000 0.500000 1.000000
+0.000000 0.000000 0.000000 1.000000
+0.000000 4.000000 0.000000 1.000000
+
+// Pink2
+Light: 11 5
+0.500000 0.350000 0.350000 1.000000
+0.950000 0.500000 0.500000 1.000000
+0.000000 0.000000 0.000000 1.000000
+0.000000 4.000000 0.000000 1.000000
+
+// Computer
+Light: 6 2
+0.200000 0.300000 0.250000 1.000000
+0.200000 0.500000 0.400000 1.000000
+0.100000 0.500000 0.200000 1.000000
+0.000000 3.000000 2.000000 1.000000
+
+Model: # box2.txt
+Model: . floor.txt
+Model: a lamp01.txt
+Model: b lamp02.txt
+Model: c plant01.txt
+Model: d plant02.txt
+Model: e plant03.txt
+Model: f plant04.txt
+Model: g computer.txt
+Model: h fan.txt
+
+// Map layers
+// Each world map may consist of several layers. This allows to place several objects in one place.
+
+// Each line must be enclosed between quotation-marks ("...").
+// The top-left corner is (0, 0)
+// Must end with an empty string
+Layer:
+"#################"
+"#...............#"
+"#.#.......#.###.#"
+"#...........###.#"
+"#...............#"
+"#...........#####"
+"#.#.......#.#    "
+"#...........#    "
+"#############    "
+""
+
+Layer:
+"                 "
+"                 "
+"   d  g  f       "
+"  c       eb     "
+"      h          "
+"  ea      cb     "
+"   f     d       "
+"                 "
+"                 "
+""
