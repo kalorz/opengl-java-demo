@@ -46,21 +46,21 @@ public class ResourceTokenizer {
         setupTokenizer(tokenizer, WORD_CHARS, WHITESPACE_CHARS, COMMENT_CHARS, QUOTE_CHARS);
     }
 
-    public String nextToken(String error) throws IOException {
+    public String nextToken() throws IOException {
         int token = tokenizer.nextToken();
 
         if (token == StreamTokenizer.TT_EOF) {
             eof = true;
         } else if (token != StreamTokenizer.TT_WORD) {
-            throw new IOException("Parse error reading " + error + " at line " + tokenizer.lineno());
+            throw new IOException("Parse error reading token at line " + tokenizer.lineno());
         }
 
         return String.valueOf(tokenizer.sval);
     }
 
-    public String nextString(String error) throws IOException {
+    public String nextString() throws IOException {
         if (tokenizer.nextToken() != StreamTokenizer.TT_WORD) {
-            throw new IOException("Parse error reading " + error + " at line " + tokenizer.lineno());
+            throw new IOException("Parse error reading string at line " + tokenizer.lineno());
         }
 
         return String.valueOf(tokenizer.sval);
@@ -71,34 +71,34 @@ public class ResourceTokenizer {
     // DO POPRAWIENIA !!!
     // DO POPRAWIENIA !!!
     // DO POPRAWIENIA !!!
-    public String nextQuote(String error) throws IOException {
+    public String nextQuote() throws IOException {
         try {
             tokenizer.nextToken();
         } catch (IOException e) {
-            throw new IOException("Parse error reading " + error + " at line " + tokenizer.lineno());
+            throw new IOException("Parse error reading quote at line " + tokenizer.lineno());
         }
         return String.valueOf(tokenizer.sval);
     }
 
-    public int nextInt(String error) throws IOException {
+    public int nextInt() throws IOException {
         if (tokenizer.nextToken() != StreamTokenizer.TT_WORD) {
-            throw new IOException("Parse error reading " + error + " at line " + tokenizer.lineno());
+            throw new IOException("Parse error reading int at line " + tokenizer.lineno());
         }
 
         try {
             return Integer.parseInt(tokenizer.sval);
         } catch (NumberFormatException e) {
-            throw new IOException("Wrong number format reading " + error + " at line " + tokenizer.lineno());
+            throw new IOException("Wrong number format reading int at line " + tokenizer.lineno());
         }
     }
 
-    public float nextFloat(String error) throws IOException {
+    public float nextFloat() throws IOException {
         if (tokenizer.nextToken() != StreamTokenizer.TT_WORD) {
-            throw new IOException("Parse error reading " + error + " at line " + tokenizer.lineno());
+            throw new IOException("Parse error reading float at line " + tokenizer.lineno());
         } try {
             return Float.parseFloat(tokenizer.sval);
         } catch (NumberFormatException e) {
-            throw new IOException("Wrong number format reading " + error + " at line " + tokenizer.lineno());
+            throw new IOException("Wrong number format reading float at line " + tokenizer.lineno());
         }
     }
 

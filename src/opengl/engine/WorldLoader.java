@@ -54,20 +54,20 @@ public class WorldLoader implements ResourceLoader<World> {
             Map<Point, float[][]> lightMap = new HashMap<Point, float[][]>();
             Point start = null;
 
-            String token = rt.nextToken("token");
+            String token = rt.nextToken();
             while (!rt.eof()) {
                 if (token.equalsIgnoreCase("Layer:")) {
                     StringBuilder sb = new StringBuilder();
                     int width = 0, height = 0;
 
-                    String mapLine = rt.nextQuote("map string");
+                    String mapLine = rt.nextQuote();
                     while (!mapLine.isEmpty()) {
                         width = Math.max(width, mapLine.length());
                         height += 1;
 
                         sb.append(mapLine);
 
-                        mapLine = rt.nextQuote("map string");
+                        mapLine = rt.nextQuote();
                     }
 
                     if (world == null) {
@@ -76,33 +76,33 @@ public class WorldLoader implements ResourceLoader<World> {
 
                     worldLayers.add(sb.toString());
                 } else if (token.equalsIgnoreCase("Model:")) {
-                    modelMap.put(rt.nextString("Model symbol"), rt.nextString("Model name"));
+                    modelMap.put(rt.nextString(), rt.nextString());
                 } else if (token.equalsIgnoreCase("Light:")) {
                     Point lightPosition = new Point();
-                    lightPosition.x = rt.nextInt("x-coordinate of light position");
-                    lightPosition.y = rt.nextInt("y-coordinate of light position");
+                    lightPosition.x = rt.nextInt();
+                    lightPosition.y = rt.nextInt();
 
                     float[] ambient = new float[4];
-                    for (int i=0; i<4; i++) ambient[i] = rt.nextFloat("ambient");
+                    for (int i=0; i<4; i++) ambient[i] = rt.nextFloat();
 
                     float[] diffuse = new float[4];
-                    for (int i=0; i<4; i++) diffuse[i] = rt.nextFloat("diffuse");
+                    for (int i=0; i<4; i++) diffuse[i] = rt.nextFloat();
 
                     float[] specular = new float[4];
-                    for (int i=0; i<4; i++) specular[i] = rt.nextFloat("specular");
+                    for (int i=0; i<4; i++) specular[i] = rt.nextFloat();
 
                     float[] position = new float[4];
-                    for (int i=0; i<4; i++) position[i] = rt.nextFloat("position");
+                    for (int i=0; i<4; i++) position[i] = rt.nextFloat();
 
                     lightMap.put(lightPosition, new float[][]{ambient, diffuse, specular, position});
                 } else if (token.equalsIgnoreCase("Start:")) {
                     start = new Point();
 
-                    start.x = rt.nextInt("x-coordinate of starting position");
-                    start.y = rt.nextInt("y-coordinate of starting position");
+                    start.x = rt.nextInt();
+                    start.y = rt.nextInt();
                 }
 
-                token = rt.nextToken("token");
+                token = rt.nextToken();
             }
 
             for (String worldLayer : worldLayers) {

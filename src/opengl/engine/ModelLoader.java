@@ -50,48 +50,48 @@ public class ModelLoader implements ResourceLoader<Model> {
 
             System.out.println("Loading model " + path);
 
-            th.nextString("block");
-            model.setBlock(th.nextInt("block") != 0);
+            th.nextString();
+            model.setBlock(th.nextInt() != 0);
 
-            th.nextString("frames variable");
-            th.nextInt("number of frames");
-            th.nextString("frame variable");
-            th.nextInt("current frame number");
-            th.nextString("meshes variable");
+            th.nextString();
+            th.nextInt();
+            th.nextString();
+            th.nextInt();
+            th.nextString();
 
             // Wczytywanie grup (meshes - kawalki obiektu o roznych materialach)
-            int numMeshes = th.nextInt("number of meshes");
+            int numMeshes = th.nextInt();
             Mesh[] meshes = new Mesh[numMeshes];
             for (int mesh = 0; mesh < numMeshes; mesh++) {
-                String meshName = th.nextQuote("name of mesh");
+                String meshName = th.nextQuote();
                 //System.out.print("    Mesh " + mesh + ": ");
-                int meshFlags = th.nextInt("current mesh flags");
-                int meshMaterialIndex = th.nextInt("current mesh material index");
+                int meshFlags = th.nextInt();
+                int meshMaterialIndex = th.nextInt();
 
                 // Wczytywanie punktow
-                int numVertices = th.nextInt("number of vertices");
+                int numVertices = th.nextInt();
                 float[][] vertices = new float[numVertices][7];
                 for (int i = 0; i < numVertices; i++) {
                     for (int j = 0; j < 7; j++) {
-                        vertices[i][j] = th.nextFloat("vertex");
+                        vertices[i][j] = th.nextFloat();
                     }
                 }
 
                 // Wczytywanie wektorow normalnych
-                int numNormals = th.nextInt("number of normals");
+                int numNormals = th.nextInt();
                 float[][] normals = new float[numNormals][3];
                 for (int i = 0; i < numNormals; i++) {
                     for (int j = 0; j < 3; j++) {
-                        normals[i][j] = th.nextFloat("normal");
+                        normals[i][j] = th.nextFloat();
                     }
                 }
 
                 // Wczytywanie trojkatow
-                int numTriangles = th.nextInt("number of triangles");
+                int numTriangles = th.nextInt();
                 int[][] triangles = new int[numTriangles][8];
                 for (int i = 0; i < numTriangles; i++) {
                     for (int j = 0; j < 8; j++) {
-                        triangles[i][j] = th.nextInt("triangle");
+                        triangles[i][j] = th.nextInt();
                     }
                 }
 
@@ -104,36 +104,36 @@ public class ModelLoader implements ResourceLoader<Model> {
             }
 
             // Wczytywanie materialow
-            th.nextString("materials variable");
-            int numMaterials = th.nextInt("number of materials");
+            th.nextString();
+            int numMaterials = th.nextInt();
             Material[] materials = new Material[numMaterials];
             for (int material = 0; material < numMaterials; material++) {
-                String materialName = th.nextQuote("name of material");
+                String materialName = th.nextQuote();
                 //System.out.print("    Material " + material + ": ");
                 float[] ambient = new float[4];
                 for (int i = 0; i < 4; i++) {
-                    ambient[i] = th.nextFloat("ambient");
+                    ambient[i] = th.nextFloat();
                 }
 
                 float[] diffuse = new float[4];
                 for (int i = 0; i < 4; i++) {
-                    diffuse[i] = th.nextFloat("diffuse");
+                    diffuse[i] = th.nextFloat();
                 }
 
                 float[] specular = new float[4];
                 for (int i = 0; i < 4; i++) {
-                    specular[i] = th.nextFloat("specular");
+                    specular[i] = th.nextFloat();
                 }
 
                 float[] emissive = new float[4];
                 for (int i = 0; i < 4; i++) {
-                    emissive[i] = th.nextFloat("emissive");
+                    emissive[i] = th.nextFloat();
                 }
 
-                float shininess = th.nextFloat("shininess");
-                float transparency = th.nextFloat("transparency");
-                String textureName = th.nextQuote("color map");
-                String alphaMap = th.nextQuote("alpha map");
+                float shininess = th.nextFloat();
+                float transparency = th.nextFloat();
+                String textureName = th.nextQuote();
+                String alphaMap = th.nextQuote();
 
                 Texture texture = null;
                 if (!textureName.isEmpty()) {
@@ -144,13 +144,13 @@ public class ModelLoader implements ResourceLoader<Model> {
             }
 
             // Wczytywanie informacji o animacji
-            th.nextString("animated variable");
-            String isAnimated = th.nextString("is model animated");
+            th.nextString();
+            String isAnimated = th.nextString();
             if ("true".equals(isAnimated)) {
                 float[] animationDelta = new float[3];
-                animationDelta[0] = th.nextFloat("angleX");
-                animationDelta[1] = th.nextFloat("angleY");
-                animationDelta[2] = th.nextFloat("angleZ");
+                animationDelta[0] = th.nextFloat();
+                animationDelta[1] = th.nextFloat();
+                animationDelta[2] = th.nextFloat();
                 model.animationDelta = animationDelta;
                 model.animation = new float[3];
                 model.animated = true;
