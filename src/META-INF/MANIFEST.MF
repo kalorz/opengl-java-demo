@@ -1,3 +1,5 @@
 Manifest-Version: 1.0
+Class-Path: lib/gluegen-rt.jar lib/gluegen-rt-natives-macosx-universal
+ .jar lib/jogl-all-natives-macosx-universal.jar lib/jogl-all.jar
 Main-Class: opengl.engine.GameWindow
 

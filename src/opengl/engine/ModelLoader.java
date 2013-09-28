@@ -49,15 +49,15 @@ public class ModelLoader implements ResourceLoader<Model> {
             model = new Model();
 
             System.out.println("Loading model " + path);
-            String nullOut = null;
 
-            nullOut = th.nextString("block");
+            th.nextString("block");
             model.setBlock(th.nextInt("block") != 0);
-            nullOut = th.nextString("frames variable");
-            int numFrames = th.nextInt("number of frames");
-            nullOut = th.nextString("frame variable");
-            int frame = th.nextInt("current frame number");
-            nullOut = th.nextString("meshes variable");
+
+            th.nextString("frames variable");
+            th.nextInt("number of frames");
+            th.nextString("frame variable");
+            th.nextInt("current frame number");
+            th.nextString("meshes variable");
 
             // Wczytywanie grup (meshes - kawalki obiektu o roznych materialach)
             int numMeshes = th.nextInt("number of meshes");
@@ -104,7 +104,7 @@ public class ModelLoader implements ResourceLoader<Model> {
             }
 
             // Wczytywanie materialow
-            nullOut = th.nextString("materials variable");
+            th.nextString("materials variable");
             int numMaterials = th.nextInt("number of materials");
             Material[] materials = new Material[numMaterials];
             for (int material = 0; material < numMaterials; material++) {
@@ -144,7 +144,7 @@ public class ModelLoader implements ResourceLoader<Model> {
             }
 
             // Wczytywanie informacji o animacji
-            nullOut = th.nextString("animated variable");
+            th.nextString("animated variable");
             String isAnimated = th.nextString("is model animated");
             if ("true".equals(isAnimated)) {
                 float[] animationDelta = new float[3];
