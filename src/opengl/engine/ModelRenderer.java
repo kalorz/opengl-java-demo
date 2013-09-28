@@ -12,8 +12,8 @@ public class ModelRenderer {
     }
 
     public void render(Model model) {
-        for (int i = model.getDisplayList(); i < model.getDisplayList() + model.getMeshes().length; i++) {
-            gl.glCallList(i);
+        for (int i = 0; i < model.getMeshes().length; i++) {
+            gl.glCallList(model.getDisplayList() + i);
         }
     }
 
