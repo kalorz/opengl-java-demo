@@ -23,6 +23,10 @@ public class Game implements GLEventListener {
     private boolean useLighting = true;
     private boolean[] lights = new boolean[World.MAX_LIGHTS];
 
+    private ResourceRepository<Texture> textureRepository;
+    private ResourceRepository<Model> modelRepository;
+    private ResourceRepository<World> worldRepository;
+
     private Camera camera;
     private World world;
     private WorldRenderer worldRenderer;
@@ -32,6 +36,10 @@ public class Game implements GLEventListener {
     private ModelCompiler modelCompiler;
 
     public Game() {
+        textureRepository = new ResourceRepository<Texture>(new TextureLoader());
+        modelRepository = new ResourceRepository<Model>(new ModelLoader(textureRepository));
+        worldRepository = new ResourceRepository<World>(new WorldLoader(modelRepository));
+
         Arrays.fill(lights, true);
     }
 
@@ -185,11 +193,7 @@ public class Game implements GLEventListener {
         try {
             debug("LOADING WORLD");
 
-            ResourceRepository<Texture> textureRepository = new ResourceRepository<Texture>(new TextureLoader());
-            ResourceRepository<Model> modelRepository = new ResourceRepository<Model>(new ModelLoader(textureRepository));
-            ResourceRepository<World> mapRepository = new ResourceRepository<World>(new WorldLoader(modelRepository));
-
-            world = mapRepository.get(name);
+            world = worldRepository.get(name);
 
             debug("COMPILING MODELS");
 
