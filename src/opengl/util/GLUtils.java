@@ -1,11 +1,11 @@
-package opengl.engine;
+package opengl.util;
 
 import javax.media.opengl.GL2;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 import java.nio.charset.Charset;
 
-public class GLUtil {
+public class GLUtils {
 
     public static void setupContext(GL2 gl) {
         gl.glShadeModel(GL2.GL_SMOOTH);
@@ -14,8 +14,13 @@ public class GLUtil {
         gl.glClearDepth(1.0f);
         gl.glEnable(GL2.GL_DEPTH_TEST);
         gl.glEnable(GL2.GL_BLEND);
+        gl.glEnable(GL2.GL_ALPHA_TEST);
         gl.glEnable(GL2.GL_LIGHTING);
+        gl.glTexEnvf(GL2.GL_TEXTURE_ENV, GL2.GL_TEXTURE_ENV_MODE, GL2.GL_MODULATE);
+        gl.glBlendFunc(GL2.GL_SRC_ALPHA, GL2.GL_ONE_MINUS_SRC_ALPHA);
         gl.glDepthFunc(GL2.GL_LEQUAL);
+        //gl.glEnable(GL2.GL_COLOR_MATERIAL);
+        //gl.glColorMaterial(GL2.GL_FRONT_AND_BACK, GL2.GL_AMBIENT_AND_DIFFUSE);
 
         gl.glHint(GL2.GL_PERSPECTIVE_CORRECTION_HINT, GL2.GL_NICEST);
         gl.glHint(GL2.GL_FOG_HINT, GL2.GL_NICEST);
@@ -63,7 +68,7 @@ public class GLUtil {
             gl.glLinkProgram(shaderProgram);
             gl.glValidateProgram(shaderProgram);
 
-            String status = GLUtil.getProgramStatus(gl, shaderProgram, GL2.GL_LINK_STATUS);
+            String status = GLUtils.getProgramStatus(gl, shaderProgram, GL2.GL_LINK_STATUS);
             if (status != null) {
                 System.err.println("Shader linking error:");
                 System.err.println(status);

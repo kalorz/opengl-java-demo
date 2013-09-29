@@ -1,6 +1,8 @@
 // MilkShape 3D ASCII
 
 Block: 0
+Floor: 1
+
 Frames: 30
 Frame: 1
 

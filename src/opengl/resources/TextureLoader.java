@@ -1,8 +1,9 @@
-package opengl.engine;
+package opengl.resources;
 
 import com.jogamp.common.util.IOUtil;
 import com.jogamp.opengl.util.texture.Texture;
 import com.jogamp.opengl.util.texture.TextureIO;
+import opengl.engine.Config;
 
 import javax.media.opengl.GLException;
 import java.io.IOException;

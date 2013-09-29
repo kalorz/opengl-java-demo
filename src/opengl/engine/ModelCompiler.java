@@ -16,7 +16,7 @@ public class ModelCompiler {
         this.gl = gl;
     }
 
-    public void compile(Model model) throws IOException {
+    public void compile(Model model) {
         if (model.getMeshes().length > 0) {
             Texture texture = null;
 

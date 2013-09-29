@@ -1,4 +1,6 @@
-package opengl.engine;
+package opengl.resources;
+
+import opengl.engine.Config;
 
 import java.io.IOException;
 import java.io.InputStream;

@@ -7,7 +7,7 @@
  * and open the template in the editor.
  */
 
-package opengl.engine;
+package opengl.resources;
 
 import java.io.IOException;
 import java.io.StreamTokenizer;

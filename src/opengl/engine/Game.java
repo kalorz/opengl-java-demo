@@ -4,7 +4,10 @@ import com.jogamp.opengl.util.texture.Texture;
 import opengl.engine.effects.FlashLight;
 import opengl.engine.effects.NightVision;
 import opengl.engine.effects.ToonShader;
+import opengl.resources.*;
 import opengl.model.Model;
+import opengl.util.CollectionUtils;
+import opengl.util.GLUtils;
 
 import javax.media.opengl.GL2;
 import javax.media.opengl.GLAutoDrawable;
@@ -13,6 +16,7 @@ import javax.media.opengl.glu.GLU;
 import java.awt.geom.Point2D;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Random;
 
 public class Game implements GLEventListener {
     private final GLU glu = new GLU();
@@ -52,8 +56,8 @@ public class Game implements GLEventListener {
 
         world = loadWorld("room.txt");
 
-        GLUtil.setupContext(gl);
-        GLUtil.setupLights(gl, GL2.GL_LIGHT0, world.getLights());
+        GLUtils.setupContext(gl);
+        GLUtils.setupLights(gl, GL2.GL_LIGHT0, world.getLights());
 
         nightVision = new NightVision(gl, GL2.GL_LIGHT6);
         flashLight = new FlashLight(gl, GL2.GL_LIGHT7, PLAYER_HEIGHT / 3.0f, BLOCK_WIDTH);
@@ -88,9 +92,9 @@ public class Game implements GLEventListener {
         gl.glClear(GL2.GL_COLOR_BUFFER_BIT | GL2.GL_DEPTH_BUFFER_BIT);
         gl.glLoadIdentity();
 
-        GLUtil.toggleGouraud(gl, useGouraud);
-        GLUtil.toggleLighting(gl, useLighting);
-        GLUtil.toggleLights(gl, GL2.GL_LIGHT0, lights);
+        GLUtils.toggleGouraud(gl, useGouraud);
+        GLUtils.toggleLighting(gl, useLighting);
+        GLUtils.toggleLights(gl, GL2.GL_LIGHT0, lights);
 
         updateCamera();
 
@@ -98,10 +102,11 @@ public class Game implements GLEventListener {
         gl.glRotatef(360 - camera.getHorizontalHeading(), 0.0f, 1.0f, 0.0f);
         gl.glTranslatef(-camera.getX(), -camera.getWalkBias() - PLAYER_HEIGHT, -camera.getZ());
 
+        toonShader.start();
         nightVision.render();
         flashLight.render();
-        toonShader.render();
         worldRenderer.render(world, BLOCK_WIDTH);
+        toonShader.stop();
 
         gl.glFlush();
     }
@@ -148,6 +153,19 @@ public class Game implements GLEventListener {
 
     public void resetLook() {
         camera.resetLook();
+    }
+
+    public void insertModel() {
+        Model model = null;
+
+        do {
+            model = CollectionUtils.randomElement(modelRepository.values());
+        } while (model.isBlock() || model.isFloor());
+
+        model = new Model(model);
+        model.setRotate(new Random().nextFloat() * 360f);
+
+        world.addModel(model, positionToBlock(camera.getX()) - 1, positionToBlock(camera.getZ()) - 1);
     }
 
     // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-

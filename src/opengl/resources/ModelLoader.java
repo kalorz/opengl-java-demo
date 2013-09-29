@@ -3,9 +3,10 @@
  *
  * Created on February 6, 2006, 4:25 AM
  */
-package opengl.engine;
+package opengl.resources;
 
 import com.jogamp.opengl.util.texture.Texture;
+import opengl.engine.Config;
 import opengl.model.Material;
 import opengl.model.Mesh;
 import opengl.model.Model;
@@ -52,6 +53,9 @@ public class ModelLoader implements ResourceLoader<Model> {
 
             th.nextString();
             model.setBlock(th.nextInt() != 0);
+
+            th.nextString();
+            model.setFloor(th.nextInt() != 0);
 
             th.nextString();
             th.nextInt();

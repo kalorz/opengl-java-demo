@@ -1,4 +1,4 @@
-package opengl.engine;
+package opengl.resources;
 
 import java.io.IOException;
 

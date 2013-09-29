@@ -3,11 +3,13 @@
  *
  * Created on 4 luty 2006, 12:59
  */
-package opengl.engine;
+package opengl;
 
 import com.jogamp.newt.event.*;
 import com.jogamp.newt.opengl.GLWindow;
 import com.jogamp.opengl.util.Animator;
+import opengl.engine.Game;
+import opengl.engine.HelpOverlay;
 import opengl.engine.input.KeyHandler;
 import opengl.engine.input.MouseHandler;
 import opengl.engine.input.QuitHandler;
@@ -19,7 +21,7 @@ import javax.media.opengl.GLProfile;
 /**
  * @author Administrator
  */
-public class GameWindow {
+public class Launcher {
 
     // Tytul okienka
     private final static String WINDOW_TITLE = "Ryj kota";
@@ -47,7 +49,7 @@ public class GameWindow {
 
         glWindow.setSize(800, 600);
         glWindow.setTitle(WINDOW_TITLE);
-        // glWindow.setAlwaysOnTop(true);
+        glWindow.setAlwaysOnTop(true);
         glWindow.setPointerVisible(false);
         glWindow.setVisible(true);
         glWindow.requestFocus();

@@ -10,27 +10,28 @@
 package opengl.engine;
 
 import com.jogamp.opengl.util.gl2.GLUT;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.List;
+
 import javax.media.opengl.GL2;
 import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.GLEventListener;
 import javax.media.opengl.glu.GLU;
-import javax.swing.KeyStroke;
+import javax.swing.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 public class HelpOverlay implements GLEventListener {
-    private List<String> keyboardEntries = new ArrayList();
-    private List<String> mouseEntries = new ArrayList();
-    private boolean visible = true;
-    private final GLUT glut = new GLUT();
-    private final GLU glu = new GLU();
     private static final int CHAR_HEIGHT = 13;
     private static final int OFFSET = 13;
     private static final int INDENT = 8;
     private static final String KEYBOARD_CONTROLS = "Klawiatura";
     private static final String MOUSE_CONTROLS = "Myszka";
+    private final GLUT glut = new GLUT();
+    private final GLU glu = new GLU();
+    private List<String> keyboardEntries = new ArrayList();
+    private List<String> mouseEntries = new ArrayList();
+    private boolean visible = true;
 
     public boolean isVisible() {
         return visible;
@@ -184,5 +185,5 @@ public class HelpOverlay implements GLEventListener {
         System.out.println("HelpOverlay.dispose()");
         System.out.println("--------------------------------------------------------------------------------");
     }
-    
+
 }

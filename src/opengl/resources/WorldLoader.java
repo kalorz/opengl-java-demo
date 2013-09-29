@@ -7,8 +7,10 @@
  * and open the template in the editor.
  */
 
-package opengl.engine;
+package opengl.resources;
 
+import opengl.engine.Config;
+import opengl.engine.World;
 import opengl.model.Model;
 
 import java.awt.*;

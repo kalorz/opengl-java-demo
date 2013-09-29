@@ -22,6 +22,7 @@ public class KeyHandler extends KeyAdapter {
         helpOverlay.registerKeyStroke("[", "Cieniowanie plaskie / Gourauda");
         helpOverlay.registerKeyStroke("]", "Wlaczenie / wylaczenie obslugi swiatla");
         helpOverlay.registerKeyStroke("\\", "Wlaczenie / wylaczenie shaderow");
+        helpOverlay.registerKeyStroke(KeyStroke.getKeyStroke(KeyEvent.VK_Q, 0), "Wrzuc obiekt");
         helpOverlay.registerKeyStroke(KeyStroke.getKeyStroke(KeyEvent.VK_H, 0), "Pomoc");
     }
 
@@ -63,6 +64,9 @@ public class KeyHandler extends KeyAdapter {
                 break;
             case KeyEvent.VK_END:
                 game.resetLook();
+                break;
+            case KeyEvent.VK_Q:
+                game.insertModel();
                 break;
             case KeyEvent.VK_H:
                 helpOverlay.toggle();

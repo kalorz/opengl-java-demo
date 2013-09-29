@@ -1,5 +1,8 @@
 package opengl.engine;
 
+import opengl.engine.ModelAnimator;
+import opengl.engine.ModelRenderer;
+import opengl.engine.World;
 import opengl.model.Model;
 
 import javax.media.opengl.GL2;
@@ -20,12 +23,13 @@ public class WorldRenderer {
         for (int i = 0; i < world.getHeight(); i++) {
             gl.glPushMatrix();
             for (int j = 0; j < world.getWidth(); j++) {
-                int _light = world.getLightMap()[i][j];
-                if (_light != -1) {
-                    gl.glLightfv(GL2.GL_LIGHT0 + _light, GL2.GL_POSITION, world.getLights()[_light][3], 0);
+                int lightIndex = world.getLightMap()[i][j];
+                if (lightIndex != -1) {
+                    gl.glLightfv(GL2.GL_LIGHT0 + lightIndex, GL2.GL_POSITION, world.getLights()[lightIndex][3], 0);
                 }
+
                 List<Model> models = world.getModels(j, i);
-                if (models != null && models.size() > 0) {
+                if (models != null) {
                     for (Model model : models) {
                         if (model.animated) {
                             modelAnimator.animate(model);
