@@ -1,11 +1,5 @@
 package opengl.model;
 
-import com.jogamp.opengl.util.texture.Texture;
-import java.util.HashMap;
-import java.util.Map;
-import javax.media.opengl.GL2;
-import javax.media.opengl.fixedfunc.GLLightingFunc;
-
 public class Model {
 
     private Material[] materials;

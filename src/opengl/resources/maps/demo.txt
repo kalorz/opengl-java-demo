@@ -1,0 +1,32 @@
+// Map 3D ASCII
+// ------------
+// File format: Karol Sarnacki
+
+// Starting position of player
+// (int)Start-X  (int)Start-Y
+Start: 7 3
+
+Light: 7 3
+// Parameters of light: Ambient, Diffuse, Specular, Position
+1.000000 1.000000 1.000000 1.000000
+1.000000 1.000000 1.000000 1.000000
+1.000000 1.000000 1.000000 1.000000
+3.000000 13.000000 0.000000 1.000000
+
+// Models used in map layers
+// One-character symbols are mapped to models.
+Model: a lamp01.txt
+Model: b lamp02.txt
+Model: c plant01.txt
+Model: d plant02.txt
+Model: e plant03.txt
+Model: f plant04.txt
+Model: g computer.txt
+
+Layer:
+" a b c d e f g "
+"               "
+"a b c d e f g  "
+"               "
+"  a b c d e f g"
+""

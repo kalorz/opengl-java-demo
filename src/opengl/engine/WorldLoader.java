@@ -13,10 +13,8 @@ import opengl.model.Model;
 
 import java.awt.*;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
 
 import static java.util.Map.Entry;
 
@@ -50,8 +48,8 @@ public class WorldLoader implements ResourceLoader<World> {
             ResourceTokenizer.setupTokenizer(tokenizer);
 
             List<String> worldLayers = new ArrayList<String>();
-            Map<String, String> modelMap = new HashMap<String, String>();
-            Map<Point, float[][]> lightMap = new HashMap<Point, float[][]>();
+            Map<String, String> modelMap = new LinkedHashMap<String, String>();
+            Map<Point, float[][]> lightMap = new LinkedHashMap<Point, float[][]>();
             Point start = null;
 
             String token = rt.nextToken();

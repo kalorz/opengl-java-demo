@@ -3,20 +3,19 @@ package opengl.engine.effects;
 import javax.media.opengl.GL2;
 import java.util.Arrays;
 
-public class FlashLight {
+public class FlashLight extends Effect {
     float[] AMBIENT = {1.0f, 1.0f, 1.0f, 1.0f};
     float[] DIFFUSE = {1.0f, 1.0f, 1.0f, 1.0f};
     float[] SPECULAR = {0.0f, 0.0f, 0.0f, 1.0f};
     float[] POSITION = {0.0f, 0.0f, 0.0f, 1.0f};
     //float[] lightDirection = { 0.0f, 0.0f, 1.0f };
 
-    final private GL2 gl;
     final private int light;
     private float[] position;
-    private boolean enabled;
 
     public FlashLight(GL2 gl, int light, float height, float distance) {
-        this.gl = gl;
+        super(gl);
+
         this.light = light;
         position = Arrays.copyOf(POSITION, POSITION.length);
         position[1] = height;
@@ -35,35 +34,11 @@ public class FlashLight {
     }
 
     public void render() {
-        if (enabled) {
+        if (isEnabled()) {
             gl.glEnable(light);
         } else {
             gl.glDisable(light);
         }
-    }
-
-    public void enable() {
-        enabled = true;
-    }
-
-    public void disable() {
-        enabled = false;
-    }
-
-    public void toggle(boolean enabled) {
-        if (enabled) {
-            enable();
-        } else {
-            disable();
-        }
-    }
-
-    public void toggle() {
-        toggle(!enabled);
-    }
-
-    public boolean isEnabled() {
-        return enabled;
     }
 
 }

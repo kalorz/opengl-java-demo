@@ -50,7 +50,7 @@ public class World {
     }
 
     public List<Model> getModels(int x, int y) {
-        return map[y][x];
+        return x >= 0 && y >= 0 && x < width && y < height ? map[y][x] : null;
     }
 
     public boolean isBlock(int x, int y) {

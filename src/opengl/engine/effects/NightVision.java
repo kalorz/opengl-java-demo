@@ -2,7 +2,7 @@ package opengl.engine.effects;
 
 import javax.media.opengl.GL2;
 
-public class NightVision {
+public class NightVision extends Effect {
     // To swiatlo jest zawsze z poziomu "oczu" - nie trzeba przesuwac
     // jego pozycji o playerHeight
     float[] AMBIENT = {0.05f, 1.0f, 0.05f, 1.0f};
@@ -14,12 +14,11 @@ public class NightVision {
     // Efekt mgly zasymuluje dzialanie noktowizora
     float[] fogColor = {0.05f, 1.0f, 0.05f, 1.0f};
     
-    private final GL2 gl;
     private final int light;
-    private boolean enabled;
 
     public NightVision(GL2 gl, int light) {
-        this.gl = gl;
+        super(gl);
+
         this.light = light;
     }
     
@@ -37,37 +36,13 @@ public class NightVision {
     }
 
     public void render() {
-        if (enabled) {
+        if (isEnabled()) {
             gl.glEnable(light);
             gl.glEnable(GL2.GL_FOG);
         } else {
             gl.glDisable(light);
             gl.glDisable(GL2.GL_FOG);
         }
-    }
-
-    public void enable() {
-        enabled = true;
-    }
-
-    public void disable() {
-        enabled = false;
-    }
-
-    public void toggle(boolean enabled) {
-        if (enabled) {
-            enable();
-        } else {
-            disable();
-        }
-    }
-
-    public void toggle() {
-        toggle(!enabled);
-    }
-
-    public boolean isEnabled() {
-        return enabled;
     }
 
 }

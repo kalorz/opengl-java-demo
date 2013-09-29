@@ -3,6 +3,7 @@ package opengl.engine;
 import com.jogamp.opengl.util.texture.Texture;
 import opengl.engine.effects.FlashLight;
 import opengl.engine.effects.NightVision;
+import opengl.engine.effects.ToonShader;
 import opengl.model.Model;
 
 import javax.media.opengl.GL2;
@@ -27,6 +28,7 @@ public class Game implements GLEventListener {
     private WorldRenderer worldRenderer;
     private NightVision nightVision;
     private FlashLight flashLight;
+    private ToonShader toonShader;
     private ModelCompiler modelCompiler;
 
     public Game() {
@@ -47,14 +49,18 @@ public class Game implements GLEventListener {
 
         nightVision = new NightVision(gl, GL2.GL_LIGHT6);
         flashLight = new FlashLight(gl, GL2.GL_LIGHT7, PLAYER_HEIGHT / 3.0f, BLOCK_WIDTH);
+        toonShader = new ToonShader(gl);
 
         nightVision.setup();
         flashLight.setup();
+        toonShader.setup();
 
         camera.setPosition(BLOCK_WIDTH * (world.getStart().x - BLOCK_WIDTH / 2.0f + 1), BLOCK_WIDTH * (world.getStart().y - BLOCK_WIDTH / 2.0f + 1));
     }
 
     public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {
+        debug("Game.reshape()");
+
         final GL2 gl = drawable.getGL().getGL2();
 
         if (height <= 0) {
@@ -63,9 +69,7 @@ public class Game implements GLEventListener {
 
         gl.glViewport(0, 0, width, height);
         gl.glMatrixMode(GL2.GL_PROJECTION);
-        gl.glLoadIdentity();
-
-        glu.gluPerspective(45.0, (float) width / (float) height, 0.1, 100);
+        glu.gluPerspective(45.0f, (float) width / (float) height, 0.1f, 100);
         gl.glMatrixMode(GL2.GL_MODELVIEW);
         gl.glLoadIdentity();
     }
@@ -88,16 +92,18 @@ public class Game implements GLEventListener {
 
         nightVision.render();
         flashLight.render();
+        toonShader.render();
         worldRenderer.render(world, BLOCK_WIDTH);
 
         gl.glFlush();
     }
 
     public void displayChanged(GLAutoDrawable drawable, boolean modeChanged, boolean deviceChanged) {
+        debug("Game.displayChanged()");
     }
 
     public void dispose(GLAutoDrawable drawable) {
-        debug("Renderer.dispose()");
+        debug("Game.dispose()");
     }
 
     // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
@@ -139,6 +145,10 @@ public class Game implements GLEventListener {
     // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
     //  USTAWIENIA
     // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+    public void toggleShader() {
+        toonShader.toggle();
+    }
+
     public void toggleGouraud() {
         useGouraud = !useGouraud;
     }

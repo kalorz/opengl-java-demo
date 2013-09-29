@@ -6,9 +6,6 @@ import opengl.engine.*;
 
 import javax.swing.*;
 
-/**
- * Created by karol on 27.09.2013.
- */
 public class KeyHandler extends KeyAdapter {
     private final Game game;
     private final HelpOverlay helpOverlay;
@@ -24,6 +21,7 @@ public class KeyHandler extends KeyAdapter {
         helpOverlay.registerKeyStroke(KeyStroke.getKeyStroke(KeyEvent.VK_8, 0), "Wylacz wszystkie swiatla");
         helpOverlay.registerKeyStroke("[", "Cieniowanie plaskie / Gourauda");
         helpOverlay.registerKeyStroke("]", "Wlaczenie / wylaczenie obslugi swiatla");
+        helpOverlay.registerKeyStroke("\\", "Wlaczenie / wylaczenie shaderow");
         helpOverlay.registerKeyStroke(KeyStroke.getKeyStroke(KeyEvent.VK_H, 0), "Pomoc");
     }
 
@@ -47,6 +45,9 @@ public class KeyHandler extends KeyAdapter {
                 break;
             case KeyEvent.VK_8:
                 game.switchLights(false);
+                break;
+            case KeyEvent.VK_BACK_SLASH:
+                game.toggleShader();
                 break;
             case KeyEvent.VK_OPEN_BRACKET:
                 game.toggleGouraud();
